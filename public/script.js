@@ -10,7 +10,8 @@ new Vue({
         cart: [],
         newSearch: 'anime',
         lastSearch: '',
-        loading: false
+        loading: false,
+        price: PRICE
     },
     methods: {
         onSubmit: function() {
@@ -42,7 +43,7 @@ new Vue({
                 this.cart.push({
                     id: item.id,
                     title: item.title,
-                    price: PRICE,
+                    price: this.price,
                     qty: 1
                 });
             }
