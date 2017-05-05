@@ -1,3 +1,5 @@
+
+
 var PRICE = 9.99;
 
 new Vue({
@@ -14,7 +16,13 @@ new Vue({
     },
     methods: {
         onSubmit: function() {
-            console.log(this.search);
+            this.$http.get('/search/'.concat(this.search))
+                .then(
+                    function(res) {
+                        console.log(res);
+                    },
+                    function() {}
+                )
         },
         addItem: function(index) {
             this.total += PRICE;
