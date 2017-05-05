@@ -8,15 +8,21 @@ new Vue({
         total: 0,
         items: [],
         cart: [],
-        search: ''
+        newSearch: '',
+        lastSearch: '',
+        loading: false
     },
     methods: {
         onSubmit: function() {
-            this.$http.get('/search/'.concat(this.search))
+            this.items = [];
+            this.loading = true;
+            this.$http.get('/search/'.concat(this.newSearch))
                 .then(
                     function(res) {
                         console.log(res);
+                        this.lastSearch = this.newSearch;
                         this.items = res.data;
+                        this.loading = false;
                     },
                     function() {}
                 )
