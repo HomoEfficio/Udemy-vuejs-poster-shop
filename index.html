@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>Vue.js Poster Shop</title>
@@ -25,8 +25,15 @@
     <div class="main">
         <div class="products">
             <div class="product" v-for="(item, index) in items">
-                <h4 class="product-title">{{ item.title }}</h4>
-                <button class="btn add-to-cart" v-on:click="addItem(index)">Add to cart</button>
+                <div>
+                    <div class="product-image">
+                        <img v-bind:src="item.link">
+                    </div>
+                </div>
+                <div>
+                    <h4 class="product-title">{{ item.title }}</h4>
+                    <button class="btn add-to-cart" v-on:click="addItem(index)">Add to cart</button>
+                </div>
             </div>
         </div>
         <div class="cart">

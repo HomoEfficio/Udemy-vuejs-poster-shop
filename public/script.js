@@ -6,11 +6,7 @@ new Vue({
     el: '#app',
     data: {
         total: 0,
-        items: [
-            { id: 1, title: 'Item 1'},
-            { id: 2, title: 'Item 2'},
-            { id: 3, title: 'Item 3'},
-        ],
+        items: [],
         cart: [],
         search: ''
     },
@@ -20,6 +16,7 @@ new Vue({
                 .then(
                     function(res) {
                         console.log(res);
+                        this.items = res.data;
                     },
                     function() {}
                 )
