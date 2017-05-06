@@ -42,7 +42,9 @@
                     <button class="btn add-to-cart" v-on:click="addItem(index)">Add to cart</button>
                 </div>
             </div>
-            <div id="product-list-bottom"></div>
+            <div id="product-list-bottom">
+                <div v-if="noMoreItems">No more items</div>
+            </div>
         </div>
         <div class="cart">
             <h2>Shopping Cart</h2>
