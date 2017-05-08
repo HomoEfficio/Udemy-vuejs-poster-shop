@@ -8,7 +8,7 @@ new Vue({
         items: [],
         cart: [],
         results: [],
-        newSearch: 'anime',
+        newSearch: '90s',
         lastSearch: '',
         loading: false,
         price: PRICE
@@ -61,20 +61,17 @@ new Vue({
                 });
             }
         },
-        inc: function(item) {
-            item.qty++;
-            this.total += item.price;
+        inc: function(i) {
+            var current = this.cart[i];
+            current.qty++;
+            this.total += current.price;
         },
-        dec: function(item) {
-            item.qty--;
-            this.total -= item.price;
-            if (item.qty <= 0) {
-                for (var i = 0, len = this.cart.length; i < len ; i++) {
-                    if (this.cart[i].id === item.id) {
-                        this.cart.splice(i, 1);
-                        break;
-                    }
-                }
+        dec: function(i) {
+            var current = this.cart[i];
+            current.qty--;
+            this.total -= current.price;
+            if (current.qty <= 0) {
+                this.cart.splice(i, 1);
             }
         }
     },

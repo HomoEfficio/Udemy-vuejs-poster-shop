@@ -49,11 +49,11 @@
         <div class="cart">
             <h2>Shopping Cart</h2>
             <transition-group name="fade" tag="ul">
-                <li class="cart-item" v-for="item in cart" v-bind:key="item.id">
+                <li class="cart-item" v-for="(item, index) in cart" v-bind:key="item.id">
                     <div class="item-title">{{ item.title }}</div>
                     <span class="item-qty">{{ item.price | currency }} * {{ item.qty }}</span>
-                    <button class="btn" v-on:click="inc(item)">+</button>
-                    <button class="btn" v-on:click="dec(item)">-</button>
+                    <button class="btn" v-on:click="inc(index)">+</button>
+                    <button class="btn" v-on:click="dec(index)">-</button>
                 </li>
             </transition-group>
             <transition name="fade">
