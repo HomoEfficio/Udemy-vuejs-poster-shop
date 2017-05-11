@@ -8,7 +8,7 @@ new Vue({
         items: [],
         cart: [],
         results: [],
-        newSearch: '90s',
+        newSearch: 'anime',
         lastSearch: '',
         loading: false,
         price: PRICE
@@ -25,7 +25,7 @@ new Vue({
                 this.items = this.items.concat(append);
             }
         },
-        onSubmit: function() {
+        onSearch: function() {
             if (this.newSearch.length) {
                 this.items = [];
                 this.loading = true;
@@ -38,10 +38,15 @@ new Vue({
                             this.loading = false;
                         },
                         function() {}
-                    )
+                    );
+                this.sendLog('search', { msg: 'searched' });
             }
         },
-        addItem: function(index) {
+        onDetail: function(i) {
+            console.log(this.items[i].title);
+            this.sendLog('view', { msg: 'detail-view' });
+        },
+        addToCart: function(index) {
             this.total += PRICE;
             var item = this.items[index];
             var found = false;
@@ -60,11 +65,13 @@ new Vue({
                     qty: 1
                 });
             }
+            this.sendLog('basket', { msg: 'added' });
         },
         inc: function(i) {
             var current = this.cart[i];
             current.qty++;
             this.total += current.price;
+            this.sendLog('basket', { msg: 'inc' });
         },
         dec: function(i) {
             var current = this.cart[i];
@@ -73,6 +80,14 @@ new Vue({
             if (current.qty <= 0) {
                 this.cart.splice(i, 1);
             }
+            this.sendLog('basket', { msg: 'dec' });
+        },
+        onOrder: function(cart) {
+            console.log(cart);
+            this.sendLog('order', { msg: 'ordered' });
+        },
+        sendLog: function(action, payload) {
+            console.log(action);
         }
     },
     filters: {
@@ -81,7 +96,9 @@ new Vue({
         }
     },
     mounted: function() {
-        this.onSubmit();
+        this.sendLog('visit', { msg: 'visited' });
+
+        this.onSearch();
 
         var vueInstance = this;
         var elem = document.getElementById('product-list-bottom');
@@ -89,5 +106,6 @@ new Vue({
         watcher.enterViewport(function() {
             vueInstance.appendItems();
         });
+
     }
 });

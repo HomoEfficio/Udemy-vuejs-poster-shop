@@ -163,6 +163,8 @@ h1 {
 
 .product-title {
     margin-top: 0;
+    cursor: pointer;
+    cursor: hand;
 }
 
 .product .add-to-cart {
@@ -228,4 +230,9 @@ h1 {
 
 .cart ul .cart-item button {
     margin-right: 3px;
+}
+
+.cart .order-now {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
 }

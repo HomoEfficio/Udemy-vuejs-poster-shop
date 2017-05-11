@@ -18,7 +18,7 @@
 <div id="app" v-cloak>
     <div class="header">
         <h1>Vue.js Poster Store</h1>
-        <form class="searchbar" v-on:submit.prevent="onSubmit">
+        <form class="searchbar" v-on:submit.prevent="onSearch">
             <input v-model="newSearch" placeholder="Search for posters">
             <input type="submit" value="Search" class="btn">
         </form>
@@ -38,9 +38,11 @@
                     </div>
                 </div>
                 <div>
-                    <h4 class="product-title">{{ item.title }}</h4>
+                    <h4 class="product-title">
+                        <span v-on:click="onDetail(index)">{{ item.title }}</span>
+                    </h4>
                     <p>Price: <strong>{{ price | currency }}</strong></p>
-                    <button class="btn add-to-cart" v-on:click="addItem(index)">Add to cart</button>
+                    <button class="btn add-to-cart" v-on:click="addToCart(index)">Add to cart</button>
                 </div>
             </div>
             <div id="product-list-bottom">
@@ -59,7 +61,8 @@
             </transition-group>
             <transition name="fade">
                 <div v-if="cart.length">
-                    <div>Total: {{ total | currency }}</div>
+                    <p>Total: {{ total | currency }}</p>
+                    <div><button class="btn order-now" v-on:click="onOrder(cart)">Order Now</button></div>
                 </div>
             </transition>
             <div v-if="cart.length === 0" class="empty-cart">
