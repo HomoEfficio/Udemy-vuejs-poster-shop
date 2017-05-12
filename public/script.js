@@ -22,6 +22,7 @@ new Vue({
     mounted: function() {
         if (RECO_UID.length === 0) {
             this.hasNoUID = true;
+            return;
         }
         this.sendLog('visit', {
             service_id: RECO_SERVICE_ID,
