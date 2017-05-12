@@ -39,12 +39,34 @@ new Vue({
                         },
                         function() {}
                     );
-                this.sendLog('search', { msg: 'searched' });
+                this.sendLog('search', {
+                    service_id: '543',
+                    uid: '33333',
+                    ref: 'http://example.com',
+                    url: 'http://example.com/product/detail.html',
+                    q: this.newSearch,
+                    user: {
+                        mid: 'BASE64ENCODED',
+                        gender: 'M',
+                        birthyear: 2010
+                    }
+                });
             }
         },
         onDetail: function(i) {
             console.log(this.items[i].title);
-            this.sendLog('view', { msg: 'detail-view' });
+            this.sendLog('view', {
+                service_id: '543',
+                uid: '33333',
+                ref: 'http://example.com',
+                url: 'http://example.com/product/detail.html',
+                q: this.newSearch,
+                user: {
+                    mid: 'BASE64ENCODED',
+                    gender: 'M',
+                    birthyear: 2010
+                }
+            });
         },
         addToCart: function(index) {
             this.total += PRICE;
@@ -65,7 +87,36 @@ new Vue({
                     qty: 1
                 });
             }
-            this.sendLog('basket', { msg: 'added' });
+            this.sendLog('basket', {
+                service_id: '543',
+                uid: '33333',
+                ref: 'http://example.com',
+                url: 'http://example.com/product/detail.html',
+                items: [
+                    {
+                        id: '888',
+                        count: 3,
+                        c1: '스포츠',
+                        c2: '의류',
+                        total_sales: 13000,
+                        order_no: '1234'
+                    },
+                    {
+                        id: '999',
+                        count: 2,
+                        c1: '가정',
+                        c2: '육아용품',
+                        c3: '기저귀',
+                        total_sales: 25000,
+                        order_no: '456'
+                    }
+                ],
+                user: {
+                    mid: 'BASE64ENCODED',
+                    gender: 'M',
+                    birthyear: 2010
+                }
+            });
         },
         inc: function(i) {
             var current = this.cart[i];
@@ -96,7 +147,17 @@ new Vue({
         }
     },
     mounted: function() {
-        this.sendLog('visit', { msg: 'visited' });
+        this.sendLog('visit', {
+            service_id: '543',
+            uid: '33333',
+            ref: 'http://example.com',
+            url: 'http://example.com/product/detail.html',
+            user: {
+                mid: 'BASE64ENCODED',
+                gender: 'M',
+                birthyear: 2010
+            }
+        });
 
         this.onSearch();
 
@@ -106,6 +167,5 @@ new Vue({
         watcher.enterViewport(function() {
             vueInstance.appendItems();
         });
-
     }
 });
